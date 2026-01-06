@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viaje a Sefarad 2026 - Olami</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Mejora para móviles */
+        @media (max-width: 768px) {
+            body {
+                overflow: auto;
+                padding: 0;
+            }
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 1rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            height: -webkit-fill-available
+        }
+
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 1.5rem 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.5); }
+            50% { text-shadow: 0 0 30px rgba(255, 255, 255, 0.8); }
+        }
+
+        .name {
+            color: #ffd700;
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0.8rem 0;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .detail {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            margin: 0.5rem 0;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .message {
+            color: white;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            line-height: 1.5;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .year {
+            color: #00ffff;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.7);
+            animation: neon 1.5s ease-in-out infinite;
+        }
+
+        @keyframes neon {
+            0%, 100% { text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff; }
+            50% { text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff, 0 0 60px #00ffff; }
+        }
+
+        .icon {
+            font-size: 2.5rem;
+            margin: 0.5rem 0;
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .error {
+            color: #ff6b6b;
+            font-size: 1.2rem;
+        }
+
+        /* Estilos para formulario de contraseña */
+        .password-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            margin: 1rem 0;
+        }
+
+        #password-input {
+            width: 100%;
+            max-width: 300px;
+            padding: 12px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1.1rem;
+            text-align: center;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        #password-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        #password-input:focus {
+            border-color: #ffd700;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .password-btn {
+            background: linear-gradient(135deg, #ffd700, #ffb347);
+            color: #333;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .password-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            text-align: center;
+            margin-top: 1rem;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* Media queries para móviles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0.5rem;
+                max-width: 95%;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .card {
+                padding: 1rem 0.8rem;
+                border-radius: 15px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .name {
+                font-size: 1.6rem;
+            }
+
+            .detail {
+                font-size: 1rem;
+                padding: 0.6rem;
+                margin: 0.3rem 0;
+            }
+
+            .message {
+                font-size: 1rem;
+                margin-top: 0.8rem;
+            }
+
+            .year {
+                font-size: 2rem;
+                margin: 0.3rem 0;
+            }
+
+            .icon {
+                font-size: 2rem;
+                margin: 0.3rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.3rem;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+                margin-bottom: 0.3rem;
+            }
+
+            .card {
+                padding: 0.8rem 0.6rem;
+                border-radius: 12px;
+            }
+
+            h1 {
+                font-size: 1.3rem;
+                margin-bottom: 0.3rem;
+            }
+
+            .name {
+                font-size: 1.4rem;
+                margin: 0.5rem 0;
+            }
+
+            .detail {
+                font-size: 0.9rem;
+                padding: 0.5rem;
+                margin: 0.3rem 0;
+            }
+
+            .message {
+                font-size: 0.9rem;
+                margin-top: 0.8rem;
+            }
+
+            .year {
+                font-size: 1.8rem;
+                margin: 0.4rem 0;
+            }
+
+            .icon {
+                font-size: 1.8rem;
+                margin: 0.4rem 0;
+            }
+
+            .error {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .container {
+                padding: 0.3rem;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .card {
+                padding: 0.8rem 0.6rem;
+            }
+
+            h1 {
+                font-size: 1.3rem;
+            }
+
+            .name {
+                font-size: 1.4rem;
+            }
+
+            .detail {
+                font-size: 0.9rem;
+                padding: 0.5rem;
+            }
+
+            .message {
+                font-size: 0.9rem;
+            }
+
+            .year {
+                font-size: 2rem;
+            }
+
+            .icon {
+                font-size: 2rem;
+            }
+        }
+
+        /* Estilos para botones de WhatsApp */
+        .whatsapp-btn {
+            background: #25d366;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        /* Contenedor de botones de WhatsApp */
+        .whatsapp-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Responsive para botones de WhatsApp */
+        @media (max-width: 768px) {
+            .whatsapp-container {
+                gap: 0.8rem;
+            }
+
+            .whatsapp-btn {
+                padding: 10px 16px;
+                font-size: 1rem;
+                gap: 6px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .whatsapp-container {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: center;
+            }
+
+            .whatsapp-btn {
+                padding: 8px 14px;
+                font-size: 0.9rem;
+                gap: 5px;
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .whatsapp-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+                max-width: 180px;
+            }
+        }
+
+        /* Responsive para mensajes diarios */
+        @media (max-width: 768px) {
+            #daily-message h4 {
+                font-size: 1rem !important;
+                margin-bottom: 0.8rem !important;
+            }
+
+            #daily-message div {
+                padding: 0.8rem !important;
+                margin-bottom: 0.8rem !important;
+            }
+
+            #daily-message strong {
+                font-size: 0.9rem !important;
+            }
+
+            #daily-message span {
+                font-size: 0.85rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #daily-message h4 {
+                font-size: 0.9rem !important;
+            }
+
+            #daily-message div {
+                padding: 0.6rem !important;
+            }
+
+            #daily-message strong {
+                font-size: 0.85rem !important;
+            }
+        }
+
+        @media (max-width: 360px) {
+            #daily-message h4 {
+                font-size: 0.8rem !important;
+                margin-bottom: 0.6rem !important;
+            }
+
+            #daily-message div {
+                padding: 0.5rem !important;
+                margin-bottom: 0.6rem !important;
+            }
+
+            #daily-message strong {
+                font-size: 0.8rem !important;
+            }
+
+            #daily-message span {
+                font-size: 0.8rem !important;
+            }
+        }
+
+        /* Estilos para botón de carta de bienvenida */
+        .welcome-letter-btn {
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-letter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.5);
+        }
+
+        .welcome-letter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .welcome-letter-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Estilos para modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.95);
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 20px 20px 0 0;
+            position: relative;
+        }
+
+        .modal-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #ff6b6b;
+            transform: scale(1.2);
+        }
+
+        .modal-body {
+            padding: 25px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .welcome-greeting {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .welcome-text p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .welcome-signature {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px solid #667eea;
+            text-align: center;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive para modal */
+        @media (max-width: 480px) {
+            .modal-content {
+                margin: 2% auto;
+                width: 95%;
+                max-height: 85vh;
+            }
+
+            .modal-header {
+                padding: 15px;
+            }
+
+            .modal-icon {
+                font-size: 2.5rem;
+            }
+
+            .modal-header h2 {
+                font-size: 1.3rem;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+
+            .welcome-greeting {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .modal-content {
+                width: 98%;
+                margin: 1% auto;
+            }
+
+            .modal-header {
+                padding: 12px;
+            }
+
+            .modal-body {
+                padding: 15px;
+            }
+
+            .welcome-greeting {
+                font-size: 1.1rem;
+            }
+
+            .welcome-text p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Estilos para botón de misión */
+        .mission-btn {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.6);
+        }
+
+        .mission-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .mission-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .mission-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Responsive para botón de misión */
+        @media (max-width: 480px) {
+            .mission-btn {
+                padding: 12px 24px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .mission-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+
+        /* Responsive para formulario de contraseña */
+        @media (max-width: 480px) {
+            .password-form {
+                gap: 0.8rem;
+            }
+
+            #password-input {
+                max-width: 250px;
+                padding: 10px 14px;
+                font-size: 1rem;
+            }
+
+            .password-btn {
+                padding: 10px 25px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            #password-input {
+                max-width: 200px;
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+
+            .password-btn {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+        <div class="logo">✡️</div>
+        <div class="card" id="content">
+            <div class="icon">🔐</div>
+            <h1>Acceso Seguro</h1>
+            <div class="detail">
+                <p style="margin-bottom: 1rem; text-align: center;">Ingresa tu contraseña para acceder a tu invitación personal</p>
+                <div class="password-form">
+                    <input type="password" id="password-input" placeholder="Contraseña" maxlength="20" autocomplete="off">
+                    <button id="submit-password" class="password-btn">Acceder</button>
+                </div>
+                <p id="error-message" class="error-message" style="display: none;">Contraseña incorrecta. Inténtalo de nuevo.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Carta de Bienvenida -->
+    <div id="welcome-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <div class="modal-icon">💌</div>
+                <h2>Carta de Bienvenida</h2>
+            </div>
+            <div class="modal-body">
+                <p class="welcome-greeting">¡Hola <span id="participant-name-modal"></span>!</p>
+                <div class="welcome-text">
+                    <p>Te damos la bienvenida a este hermoso viaje, estamos seguros que va a ser una experiencia única en la vida.</p>
+
+                    <p>Nos estamos por adentrar a una aventura importante, vamos a conocer España! Pero no solo eso, sino también aprenderemos acerca de nuestro pasado como judíos y todo lo que atravesamos viviendo ahí.</p>
+
+                    <p>Seguramente vamos a sentir muchas emociones, preparate para abrir tu corazón y conectar con tu <strong>neshama</strong> (alma).</p>
+
+                    <p>Por parte nuestra, estamos muy contentos de ser tus <strong>madrijim</strong> y acompañarte en esta aventura! Sabe que estamos acá para absolutamente todo lo que necesites!</p>
+
+                    <p>Esperamos que disfrutes muchísimo.</p>
+
+                    <div class="welcome-signature">
+                        <p>Alex, Numi y Liam Roitman.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Frases diarias para el viaje (12-21 febrero)
+        // Mensajes diarios con itinerario del viaje a Sefarad
+        const dailyMessages = {
+            '2026-01-12': {
+                titulo: '🗓 Lunes 12/01 – NOS VAMOS',
+                ciudades: 'El Aire',
+                frase: '¡El viaje comienza hoy! Prepara tu corazón para esta aventura única.',
+                itinerario: 'Duerman y coman, preparense que se viene un viaje increible!',
+                reflexion: '✨ "Que este viaje nos enseñe tanto de los lugares como de nosotros mismos"'
+            },
+            '2026-01-13': {
+                titulo: '🗓 Martes 13/01 – Madrid',
+                ciudades: '🏙️ Madrid',
+                frase: 'Que este viaje nos enseñe tanto de los lugares como de nosotros mismos.',
+                itinerario: '☕ Desayuno<br>🚶‍♂️ Tour<br>🍽 Almuerzo<br>🏨 Check in<br>🕰 Tiempo libre<br>🍴 Cena<br>🎯 Actividad',
+                reflexion: '✨ "Que este viaje nos enseñe tanto de los lugares como de nosotros mismos"'
+            },
+            '2026-01-14': {
+                titulo: '🗓 Miércoles 14/01 – Segovia · Madrid',
+                ciudades: '🏰 Segovia · 🏙️ Madrid',
+                frase: 'Somos herederos de una historia que se negó a desaparecer.',
+                itinerario: '☕ Desayuno<br>🏛 Segovia<br>🌲 Parque de aventura (ropa cómoda)<br>🍽 Almuerzo<br>🎯 Actividad<br>🏨 Hotel en Madrid<br>🍴 Cena<br>🎒 Armar carry on para una noche en Granada',
+                reflexion: '🕯 "Somos herederos de una historia que se negó a desaparecer"'
+            },
+            '2026-01-15': {
+                titulo: '🗓 Jueves 15/01 – Granada · Toledo',
+                ciudades: '🏰 Granada · 🏛️ Toledo',
+                frase: 'El mejor destino es aquel que te cambia por dentro.',
+                itinerario: '☕ Desayuno<br>🚶‍♀️ Walking tour por Toledo<br>🍽 Almuerzo<br>🏨 Check in en Granada<br>🍴 Cena<br>🎯 Actividad',
+                reflexion: '🌍 "El mejor destino es aquel que te cambia por dentro"'
+            },
+            '2026-01-16': {
+                titulo: '🗓 Viernes 16/01 – Alhambra · Málaga',
+                ciudades: '🏰 Alhambra · 🌴 Málaga',
+                frase: 'Hoy el tiempo se detiene y el alma respira.',
+                itinerario: '☕ Desayuno<br>🏰 Visita a la Alhambra (llevar pasaporte)<br>🍽 Almuerzo<br>🏨 Check in en Málaga<br>🕯 Preparación para Shabat<br>🕯 Encendido de velas (chicas)<br>🙏 Minjá (hombres)<br>🙏 Tefilá (todos)<br>🍽 Cena<br>🎶 Oneg Shabat',
+                reflexion: '🕊 "Hoy el tiempo se detiene y el alma respira"'
+            },
+            '2026-01-17': {
+                titulo: '🗓 Sábado 17/01 – Málaga',
+                ciudades: '🌴 Málaga',
+                frase: '',
+                itinerario: '',
+                reflexion: ''
+            },
+            '2026-01-18': {
+                titulo: '🗓 Domingo 18/01 – Córdoba',
+                ciudades: '🏛️ Córdoba',
+                frase: 'Juntos transformamos cada experiencia en conocimiento colectivo.',
+                itinerario: '☕ Desayuno<br>🥾 Caminito del Rey (ropa cómoda)<br>🍽 Almuerzo<br>🏨 Check in en Córdoba<br>🍴 Cena<br>🎯 Actividad',
+                reflexion: '🤝 "Juntos transformamos cada experiencia en conocimiento colectivo"'
+            },
+            '2026-01-19': {
+                titulo: '🗓 Lunes 19/01 – Córdoba',
+                ciudades: '🏛️ Córdoba',
+                frase: 'Cada lugar guarda una historia; nosotros llevamos la memoria.',
+                itinerario: '☕ Desayuno<br>🏛 Tour por Córdoba<br>🍽 Almuerzo<br>🕰 Tiempo libre<br>🧠 Peulá<br>🍴 Cena',
+                reflexion: '📜 "Cada lugar guarda una historia; nosotros llevamos la memoria"'
+            },
+            '2026-01-20': {
+                titulo: '🗓 Martes 20/01 – Córdoba · Madrid',
+                ciudades: '🏛️ Córdoba · 🏙️ Madrid',
+                frase: 'Elegimos mirar atrás para caminar con más sentido hacia adelante.',
+                itinerario: '☕ Desayuno<br>🏛 Tour por Córdoba<br>🍽 Almuerzo<br>🏨 Check in en Madrid<br>🕰 Tiempo libre<br>🍴 Cena<br>🔚 Actividad de cierre',
+                reflexion: '🔁 "Elegimos mirar atrás para caminar con más sentido hacia adelante"'
+            },
+            '2026-01-21': {
+                titulo: '🗓 Miércoles 21/01 – Madrid',
+                ciudades: '🏙️ Madrid',
+                frase: 'Lo mejor de este viaje fue caminarlo juntos.',
+                itinerario: '☕ Desayuno<br>🏨 Check out<br>✈️ Traslado al aeropuerto',
+                reflexion: '❤️ "Lo mejor de este viaje fue caminarlo juntos"'
+            }
+        };
+
+        // Función simple de hash para contraseñas
+        // Las contraseñas originales son palabras judías en mayúscula:
+        function hashPassword(password) {
+            let hash = 0;
+            for (let i = 0; i < password.length; i++) {
+                const char = password.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash; // Convertir a 32 bits
+            }
+            return hash.toString(36); // Convertir a base 36 para hacerlo más corto
+        }
+
+        // Función para obtener fecha en zona horaria de Madrid
+        function getMadridDate() {
+            const now = new Date();
+            // Convertir a zona horaria de Madrid (CET/CEST)
+            const madridTime = new Date(now.toLocaleString("en-US", {timeZone: "Europe/Madrid"}));
+            const year = madridTime.getFullYear();
+            const month = String(madridTime.getMonth() + 1).padStart(2, '0');
+            const day = String(madridTime.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        // Función para obtener el mensaje diario
+        function getDailyMessage() {
+            const today = getMadridDate();
+            return dailyMessages[today] || {
+                titulo: '¡Bienvenido al viaje!',
+                ciudades: '🇪🇸 Sefarad',
+                frase: 'Las actualizaciones diarias comenzarán pronto.',
+                itinerario: '✈️ Preparación para la aventura',
+                reflexion: '✨ "Sefarad, donde la historia se encuentra con el presente"'
+            };
+        }
+
+        const participantes = {
+            '1': { nombre: 'Agustín Chmielewski', dato: 'Participante del viaje a Sefarad 2026', password: '1jbhm' },
+            '2': { nombre: 'Iara Churba', dato: 'Participante del viaje a Sefarad 2026', password: '-xh9v3s' },
+            '3': { nombre: 'Matias Ariel Cohen', dato: 'Participante del viaje a Sefarad 2026', password: '-ull42q' },
+            '4': { nombre: 'Julián Epstein', dato: 'Participante del viaje a Sefarad 2026', password: '1dg3z' },
+            '5': { nombre: 'Chiara Furman', dato: 'Participante del viaje a Sefarad 2026', password: '1bdu5m' },
+            '6': { nombre: 'Iair Gaite Llernovoy', dato: 'Participante del viaje a Sefarad 2026', password: '-p6wge9' },
+            '7': { nombre: 'Julieta Sol Gonzalez Kratz', dato: 'Participante del viaje a Sefarad 2026', password: '199cpz' },
+            '8': { nombre: 'Martín Graiewski', dato: 'Participante del viaje a Sefarad 2026', password: 'z4f0t2' },
+            '9': { nombre: 'Zoe Juliana Gratch', dato: 'Participante del viaje a Sefarad 2026', password: '24o69e' },
+            '10': { nombre: 'Maia Cecilia Jalom', dato: 'Participante del viaje a Sefarad 2026', password: '1b6spa' },
+            '11': { nombre: 'Gonzalo David Joaquin', dato: 'Participante del viaje a Sefarad 2026', password: '19jjyp' },
+            '12': { nombre: 'Damián Lautaro Jug', dato: 'Participante del viaje a Sefarad 2026', password: '-lp1goc' },
+            '13': { nombre: 'Alma Mia Katz', dato: 'Participante del viaje a Sefarad 2026', password: '5b36yo' },
+            '14': { nombre: 'Keren Lahat', dato: 'Participante del viaje a Sefarad 2026', password: 'ynvreq' },
+            '15': { nombre: 'Damian Ariel Lerner', dato: 'Participante del viaje a Sefarad 2026', password: '15ya52' },
+            '16': { nombre: 'Gonzalo Ariel Levin', dato: 'Participante del viaje a Sefarad 2026', password: 'l7tj9n' },
+            '17': { nombre: 'Michelle Liberman', dato: 'Participante del viaje a Sefarad 2026', password: '-burdvn' },
+            '18': { nombre: 'Florencia Mandelman', dato: 'Participante del viaje a Sefarad 2026', password: '17jk6p' },
+            '19': { nombre: 'Thiago Alberto Minian', dato: 'Participante del viaje a Sefarad 2026', password: '1khe' },
+            '20': { nombre: 'Nicolas Misrahi', dato: 'Participante del viaje a Sefarad 2026', password: '1az67i' },
+            '21': { nombre: 'Guido Naidich', dato: 'Participante del viaje a Sefarad 2026', password: '-rbvgea' },
+            '22': { nombre: 'Candela Pin', dato: 'Participante del viaje a Sefarad 2026', password: '174yd' },
+            '23': { nombre: 'Ciro Polonsky Chodos', dato: 'Participante del viaje a Sefarad 2026', password: '1aydd0' },
+            '24': { nombre: 'Alan Prepelitchi', dato: 'Participante del viaje a Sefarad 2026', password: '-y9s4ii' },
+            '25': { nombre: 'Katya Raitman', dato: 'Participante del viaje a Sefarad 2026', password: '1cn3g' },
+            '26': { nombre: 'Karen Roitman', dato: 'Participante del viaje a Sefarad 2026', password: '-xh22me' },
+            '27': { nombre: 'Axel Ariel Salama', dato: 'Participante del viaje a Sefarad 2026', password: 'knzelm' },
+            '28': { nombre: 'Uriel Matias Strauss', dato: 'Participante del viaje a Sefarad 2026', password: '-xyec18' },
+            '29': { nombre: 'Ian Vaserman', dato: 'Participante del viaje a Sefarad 2026', password: 'p4zdug' },
+            '30': { nombre: 'Matias Ezequiel Wainberg Bemaman', dato: 'Participante del viaje a Sefarad 2026', password: '-vmgrdh' },
+            '31': { nombre: 'Julieta Zonis', dato: 'Participante del viaje a Sefarad 2026', password: '-bz1qqy' }
+        };
+
+        function crearEstrellas() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = Math.random() * 3 + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        function obtenerParametroId() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('id');
+        }
+
+        function mostrarFormularioPassword() {
+            const id = obtenerParametroId();
+            const content = document.getElementById('content');
+
+            if (!id) {
+                content.innerHTML = `
+                    <div class="icon">⚠️</div>
+                    <h1 class="error">ID no encontrado</h1>
+                    <p class="detail">Por favor, accede con un ID válido</p>
+                `;
+                return;
+            }
+
+            const participante = participantes[id];
+
+            if (!participante) {
+                content.innerHTML = `
+                    <div class="icon">🔍</div>
+                    <h1 class="error">Participante no registrado</h1>
+                    <p class="detail">ID: ${id}</p>
+                `;
+                return;
+            }
+
+            // Mostrar formulario de contraseña
+            content.innerHTML = `
+                <div class="icon">🔐</div>
+                <h1>Acceso Seguro</h1>
+                <div class="detail">
+                    <p style="margin-bottom: 1rem; text-align: center;">Ingresa tu contraseña para acceder a tu invitación personal</p>
+                    <div class="password-form">
+                        <input type="password" id="password-input" placeholder="Contraseña" maxlength="20" autocomplete="off">
+                        <button id="submit-password" class="password-btn">Acceder</button>
+                    </div>
+                    <p id="error-message" class="error-message" style="display: none;">Contraseña incorrecta. Inténtalo de nuevo.</p>
+                </div>
+            `;
+
+            // Agregar event listeners
+            document.getElementById('submit-password').addEventListener('click', () => verificarPassword(id));
+            document.getElementById('password-input').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    verificarPassword(id);
+                }
+            });
+        }
+
+        function verificarPassword(id) {
+            const passwordInput = document.getElementById('password-input').value.toUpperCase().trim();
+            const participante = participantes[id];
+            const errorMessage = document.getElementById('error-message');
+
+            // Hashear la contraseña ingresada y comparar con el hash almacenado
+            const hashedInput = hashPassword(passwordInput);
+
+            if (hashedInput === participante.password) {
+                mostrarBienvenida(id);
+            } else {
+                errorMessage.style.display = 'block';
+                document.getElementById('password-input').value = '';
+                document.getElementById('password-input').focus();
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        function mostrarBienvenida(id) {
+            const participante = participantes[id];
+            const content = document.getElementById('content');
+            const today = getMadridDate();
+
+            // Después del día 13, mostrar versión simplificada
+            const isAfterDay13 = today >= '2026-01-13';
+
+            // Hacer que la variable esté disponible globalmente para los event listeners
+            window.isAfterDay13 = isAfterDay13;
+
+            if (isAfterDay13) {
+                // Versión simplificada después del día 13
+                content.innerHTML = `
+                    <div class="icon">✈️</div>
+                    <h1>¡Bienvenido/a!</h1>
+                    <div class="name">${participante.nombre}</div>
+                    <div class="detail" style="background: rgba(255, 255, 255, 0.1); margin-bottom: 1rem;">🎫 Tu número es: ${id}</div>
+                    <div class="detail" style="margin-top: 2rem; background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.3);">
+                        <div style="text-align: center; margin-bottom: 1rem;">
+                            <button id="reveal-mission" class="mission-btn">🔓 Daily updates</button>
+                        </div>
+                        <div id="mission-content" style="display: none;">
+                            <div style="background: rgba(255, 215, 0, 0.1); padding: 1.5rem; border-radius: 15px; border: 2px solid rgba(255, 215, 0, 0.3);">
+                                <div id="daily-message" style="color: rgba(255, 255, 255, 0.9);">
+                                    Cargando actualización diaria...
+                                </div>
+                                <div style="text-align: center; margin-top: 1.5rem; color: rgba(255, 215, 0, 0.8); font-style: italic; font-size: 0.9rem; border-top: 1px solid rgba(255, 215, 0, 0.3); padding-top: 1rem;">
+                                    "Sefarad, donde la historia se encuentra con el presente"
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Versión completa antes/hasta el día 13
+                content.innerHTML = `
+                    <div class="icon">✈️</div>
+                    <h1>¡Bienvenido/a!</h1>
+                    <div class="name">${participante.nombre}</div>
+                    <div class="detail" style="background: rgba(255, 255, 255, 0.1); margin-bottom: 1rem;">🎫 Tu número es: ${id}</div>
+                    <div class="detail">📋 ${participante.dato}</div>
+                    <div class="year">2026</div>
+                    <div class="message">
+                        Al viaje a <strong>Sefarad</strong><br>
+                        con <strong>OLAMI</strong>
+                    </div>
+                    <div class="message">
+                        ¡Que tengas un viaje increíble! 🌟
+                    </div>
+                    <div class="detail" style="margin-top: 2rem; background: rgba(0, 255, 0, 0.1); border: 1px solid rgba(0, 255, 0, 0.3);">
+                        <strong>📱 Contactos de Emergencia:</strong><br><br>
+                        <div class="whatsapp-container">
+                            <a href="https://wa.me/5491131187529" class="whatsapp-btn">
+                                <span>📱</span> Alex
+                            </a>
+                            <a href="https://wa.me/5491130712911" class="whatsapp-btn">
+                                <span>📱</span> Numi
+                            </a>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin: 1rem 0;">
+                        <button id="open-welcome-letter" class="welcome-letter-btn">💌 Leer Carta de Bienvenida</button>
+                    </div>
+                    <div class="detail" style="margin-top: 2rem; background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.3);">
+                        <div style="text-align: center; margin-bottom: 1rem;">
+                            <button id="reveal-mission" class="mission-btn">🔓 Daily updates</button>
+                        </div>
+                        <div id="mission-content" style="display: none;">
+                            <div style="background: rgba(255, 215, 0, 0.1); padding: 1.5rem; border-radius: 15px; border: 2px solid rgba(255, 215, 0, 0.3);">
+                                <div id="daily-message" style="color: rgba(255, 255, 255, 0.9);">
+                                    Cargando actualización diaria...
+                                </div>
+                                <div style="text-align: center; margin-top: 1.5rem; color: rgba(255, 215, 0, 0.8); font-style: italic; font-size: 0.9rem; border-top: 1px solid rgba(255, 215, 0, 0.3); padding-top: 1rem;">
+                                    "Sefarad, donde la historia se encuentra con el presente"
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Agregar event listeners para modal de carta de bienvenida y misión
+            setTimeout(() => {
+                // Modal de carta de bienvenida (solo si estamos antes del día 14)
+                if (!window.isAfterDay13) {
+                    const welcomeBtn = document.getElementById('open-welcome-letter');
+
+                    if (welcomeBtn) {
+                    welcomeBtn.addEventListener('click', () => {
+                        const modal = document.getElementById('welcome-modal');
+                        const closeBtn = document.querySelector('.close-modal');
+                        const participantNameSpan = document.getElementById('participant-name-modal');
+
+                        if (modal && participantNameSpan) {
+                            // Extraer solo el primer nombre del participante
+                            const firstName = participante.nombre.split(' ')[0];
+                            participantNameSpan.textContent = firstName;
+
+                            modal.style.display = 'block';
+                            document.body.style.overflow = 'hidden';
+
+                            // Event listener para cerrar con X
+                            if (closeBtn) {
+                                closeBtn.onclick = () => {
+                                    modal.style.display = 'none';
+                                    document.body.style.overflow = 'auto';
+                                };
+                            }
+
+                            // Event listener para cerrar haciendo click fuera
+                            modal.onclick = (event) => {
+                                if (event.target === modal) {
+                                    modal.style.display = 'none';
+                                    document.body.style.overflow = 'auto';
+                                }
+                            };
+                        }
+                    });
+                }
+                }
+
+                // Botón de actualizaciones diarias
+                const revealBtn = document.getElementById('reveal-mission');
+                const missionContent = document.getElementById('mission-content');
+                const dailyMessageDiv = document.getElementById('daily-message');
+
+                if (revealBtn && missionContent && dailyMessageDiv) {
+                    revealBtn.addEventListener('click', () => {
+                        if (missionContent.style.display === 'none') {
+                            // Mostrar mensaje diario completo
+                            const message = getDailyMessage();
+                            if (typeof message === 'object') {
+                                dailyMessageDiv.innerHTML = `
+                                    <h4 style="color: #ffd700; margin-bottom: 1rem; text-align: center; font-size: 1.1rem;">${message.titulo}</h4>
+                                    <div style="background: rgba(255, 255, 255, 0.1); padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
+                                        <strong style="color: #00ffff;">🏙️ Ciudades que visitaremos:</strong><br>
+                                        <span style="color: rgba(255, 255, 255, 0.9);">${message.ciudades}</span>
+                                    </div>
+                                    <div style="background: rgba(0, 255, 255, 0.1); padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
+                                        <strong style="color: #ffd700;">💭 Frase del día:</strong><br>
+                                        <span style="color: rgba(255, 255, 255, 0.9); font-style: italic;">"${message.frase}"</span>
+                                    </div>
+                                    <div style="background: rgba(255, 105, 180, 0.1); padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
+                                        <strong style="color: #ff69b4;">📋 Itinerario:</strong><br>
+                                        <span style="color: rgba(255, 255, 255, 0.9); line-height: 1.6;">${message.itinerario}</span>
+                                    </div>
+                                `;
+                            } else {
+                                dailyMessageDiv.textContent = message;
+                            }
+
+                            missionContent.style.display = 'block';
+                            revealBtn.textContent = '🔒 Cerrar Actualización';
+                            revealBtn.style.background = 'linear-gradient(135deg, #ff4757, #ff3838)';
+                            missionContent.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        } else {
+                            missionContent.style.display = 'none';
+                            revealBtn.textContent = '🔓 Daily updates';
+                            revealBtn.style.background = 'linear-gradient(135deg, #ff6b35, #f7931e)';
+                        }
+                    });
+                }
+            }, 100);
+        }
+
+        crearEstrellas();
+        mostrarFormularioPassword();
+    </script>
+</body>
+</html>
